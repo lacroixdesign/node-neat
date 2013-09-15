@@ -96,7 +96,7 @@ First off, if you are planning to override the default grid settings (12 columns
 In your newly created  `_grid-settings.scss`, import `neat-helpers` if you are planning to use `new-breakpoint()`, then define your new variables:
 
 ```scss
-@import "neat/neat-helpers"; // or "neat-helpers" when in Rails
+@import "neat-helpers";
 
 // Change the grid settings
 $column: 90px;
