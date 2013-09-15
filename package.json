@@ -1,0 +1,25 @@
+{
+  "name": "node-neat",
+  "version": "1.0.0",
+  "description": "node-sass port of Thoughtbot's Neat library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/lacroixdesign/node-neat.git"
+  },
+  "keywords": [
+    "sass",
+    "css"
+  ],
+  "author": "Michael LaCroix <michael@lacroixdesign.net> (http://www.lacroixdesign.net)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lacroixdesign/node-neat/issues"
+  },
+  "dependencies": {
+    "node-bourbon": "*"
+  }
+}
