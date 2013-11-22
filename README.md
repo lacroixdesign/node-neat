@@ -94,6 +94,12 @@ grunt.initConfig({
 });
 ```
 
+# Testing
+
+```
+make test
+```
+
 Credits
 ===
 
