@@ -1,0 +1,104 @@
+@import 'bourbon';
+@import 'neat';
+
+/*
+ * fill-parent
+ */
+.element {
+  @include fill-parent;
+}
+
+/*
+ * media
+ */
+.responsive-element {
+  @include media(769px) {
+    @include span-columns(6);
+  }
+}
+.new-context-element {
+  @include media(min-width 320px max-width 480px, 6) {
+    @include span-columns(6);
+  }
+}
+
+/*
+ * span-columns
+ */
+.element {
+  @include span-columns(6);
+
+  .nested-element {
+    @include span-columns(2 of 6);
+  }
+}
+
+/*
+ * pad
+ */
+.element {
+  @include pad(30px -20px 10px default);
+}
+
+/*
+ * omega
+ */
+.element {
+  @include omega;
+}
+.nth-element {
+  @include omega(4n);
+}
+
+/*
+ * outer-container
+ */
+.element {
+  @include outer-container;
+}
+
+/*
+ * reset-display
+ */
+.element {
+  @include row(table);
+}
+
+/*
+ * reset-layout
+ */
+.element {
+  @include row($direction: RTL);
+}
+
+/*
+ * reset-all
+ */
+.element {
+  @include row(table, RTL);
+}
+
+/*
+ * row
+ */
+.element {
+  @include row();
+}
+
+/*
+ * shift
+ */
+.element {
+  @include shift(-3);
+}
+
+/*
+ * new-breakpoint
+ */
+$mobile: new-breakpoint(max-width 480px 4);
+
+.element {
+  @include media($mobile) {
+    @include span-columns(4);
+  }
+}
