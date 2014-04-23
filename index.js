@@ -1,6 +1,6 @@
 var path = require('path');
 
-function getPaths() {
+function includePaths() {
   var bourbonPaths = require('node-bourbon').includePaths;
   var neatPaths    = path.join(__dirname, 'assets/stylesheets');
   return bourbonPaths.concat(neatPaths);
@@ -8,6 +8,12 @@ function getPaths() {
 
 module.exports = {
 
-  includePaths: getPaths()
+  includePaths: includePaths(),
+
+  with: function() {
+    var paths  = Array.prototype.slice.call(arguments);
+    var result = [].concat.apply(includePaths(), paths);
+    return result;
+  }
 
 };

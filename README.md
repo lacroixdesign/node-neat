@@ -4,9 +4,25 @@
 are looking for the original Ruby/Rails version, you can find it
 [here](https://github.com/thoughtbot/neat).*
 
-## Requirements
+[![Build Status](https://travis-ci.org/lacroixdesign/node-neat.png?branch=master)](https://travis-ci.org/lacroixdesign/node-neat)
+
+# Contents
+
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Basic Usage](#basic-usage)
+  - [Using with gulp.js](#gulpjs-usage)
+  - [Using with Grunt](#grunt-usage)
+  - [Using with node-sass](#node-sass-usage)
+- [Getting Help](#getting-help)
+- [Testing](#testing)
+- [Credits](#credits)
+- [License](#license)
+
+# Requirements
 - [node](http://nodejs.org)
-- [node-sass](https://github.com/andrew/node-sass)
+- [gulp.js](http://gulpjs.com) -or- [Grunt](http://gruntjs.com) -or- [node-sass](https://github.com/andrew/node-sass)
 
 # Installation
 
@@ -16,57 +32,83 @@ To install as a development dependency, run:
 npm install --save-dev node-neat
 ```
 
-If you need it for production, replace `--save-dev` with `--save`.
+If you need it in production, replace `--save-dev` with `--save`.
 
 # Usage
 
-The `includePaths` property returns an array of paths for use in
-*node-sass'* `includePaths` option.
+## Basic Usage
+
+To use `node-neat` with tools like [gulp.js](#gulpjs-usage), [Grunt](#grunt-usage), or directly with [node-sass](#node-sass-usage), provide the path to Neat in your Sass config. There are a couple of convenience methods for this, depending on whether you want Sass to include additional directories or not.
+
+### with() Function
+
+The `with()` function will include any additional paths you pass as arguments.
+
+Returns an array of paths.
 
 ```javascript
-var neat = require('node-neat').includePaths;
+var neat = require('node-neat');
+// Any of these will return an array of Neat & Bourbon's paths plus your custom path(s)
+neat.with('path/to/stylesheets')
+neat.with('path/to/stylesheets1', 'path/to/stylesheets2')
+neat.with(['path/to/stylesheets1', 'path/to/stylesheets2'])
 ```
 
-You can then use this array in your options:
+### includePaths Property
+
+The `includePaths` property returns an array of Neat & Bourbon's paths to use in your config.
 
 ```javascript
-var sass = require('node-sass')
-  , neat = require('node-neat').includePaths;
-
-var paths = ['other/path', 'another/path'].concat(neat);
-
-sass.render({
-  file: './application.scss',
-  success: function(css){
-    console.log(css);
-  },
-  error: function(error) {
-    console.log(error);
-  },
-  includePaths: paths,
-  outputStyle: 'compressed'
-});
+var neat = require('node-neat');
+neat.includePaths // Array of Neat paths
 ```
 
-Neat depends on Bourbon, so it's included as an npm dependency and passes along
-*node-bourbon's* load path when accessing *node-neat's* `includePaths` property.
-Import Bourbon & then Neat at the beginning of your main scss file.
+### Stylesheet usage
+
+Use either method above with the Sass config for your chosen tool (gulp.js, Grunt, etc.), then it's business as usual for Neat & Bourbon in your stylesheet:
 
 ```scss
 @import "bourbon";
 @import "neat";
-@import "other/scss/partial";
 ```
 
-# Grunt Usage
+## gulp.js Usage
 
-Using the [grunt-sass](https://github.com/sindresorhus/grunt-sass) task:
+Using the [gulp-sass](https://github.com/dlmanning/gulp-sass) plugin.
+
+```javascript
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+
+gulp.task('sass', function () {
+  gulp.src('path/to/input.scss')
+    .pipe(sass({
+      // includePaths: require('node-neat').with('other/path', 'another/path')
+      // - or -
+      includePaths: require('node-neat').includePaths
+    }))
+    .pipe(gulp.dest('path/to/output.css'));
+});
+```
+
+## Grunt Usage
+
+### Using *grunt-sass*
+
+The [grunt-sass](https://github.com/sindresorhus/grunt-sass) task uses
+[node-sass](https://github.com/andrew/node-sass)
+([LibSass](https://github.com/hcatlin/libsass)) underneath, and is the recommended
+way to use Grunt with node-neat.
+
+Example config:
 
 ```javascript
 grunt.initConfig({
   sass: {
     dist: {
       options: {
+        // includePaths: require('node-neat').with('other/path', 'another/path')
+        // - or -
         includePaths: require('node-neat').includePaths
       },
       files: {
@@ -77,13 +119,22 @@ grunt.initConfig({
 });
 ```
 
-Using the [grunt-contrib-sass](https://github.com/gruntjs/grunt-contrib-sass) task:
+### Using *grunt-contrib-sass*
+
+If you are using the Ruby version of Sass with node-neat, then you will need to use
+the [grunt-contrib-sass](https://github.com/gruntjs/grunt-contrib-sass) task instead.
+
+*Note that node-neat is __NOT__ tested against the __Ruby__ version – only against __LibSass__.*
+
+Example config:
 
 ```javascript
 grunt.initConfig({
   sass: {
     dist: {
       options: {
+        // loadPath: require('node-neat').with('other/path', 'another/path')
+        // - or -
         loadPath: require('node-neat').includePaths
       },
       files: {
@@ -94,23 +145,55 @@ grunt.initConfig({
 });
 ```
 
+## node-sass Usage
+
+Using it directly with [node-sass](https://github.com/andrew/node-sass).
+
+```javascript
+var sass    = require('node-sass')
+var neat = require('node-neat');
+
+sass.render({
+  file: './application.scss',
+  success: function(css){
+    console.log(css);
+  },
+  error: function(error) {
+    console.log(error);
+  },
+  // includePaths: neat.with('other/path', 'another/path'),
+  // - or -
+  includePaths: neat.includePaths,
+  outputStyle: 'compressed'
+});
+```
+
+# Getting Help
+
+Feel free to tweet me with questions [@iamlacroix](https://twitter.com/iamlacroix), or [open a ticket](https://github.com/lacroixdesign/node-neat/issues) on GitHub.
+
 # Testing
+
+`node-neat` is tested against the examples provided in the 
+[Neat documentation](http://neat.bourbon.io/docs). The tests check for compile 
+errors, so if a feature compiles but the expected output is incorrect, be sure 
+to [open a ticket](https://github.com/lacroixdesign/node-neat/issues).
+
+Run the tests with:
 
 ```
 make test
 ```
 
-Credits
-===
+# Credits
 
 This node-sass port is maintained by Michael LaCroix, however all credits for
-the Neat library go to [thoughtbot, inc](http://thoughtbot.com/community):
+the Bourbon Neat library go to [thoughtbot, inc](http://thoughtbot.com/community):
 
 > ![thoughtbot](http://thoughtbot.com/images/tm/logo.png)
 >
-> Bourbon is maintained and funded by [thoughtbot, inc](http://thoughtbot.com/community). Tweet your questions or suggestions at [@kaishin](https://twitter.com/kaishin) and [@kylefiedler](https://twitter.com/kylefiedler).
+> Neat is maintained and funded by [thoughtbot, inc](http://thoughtbot.com/community). Tweet your questions or suggestions at [@kaishin](https://twitter.com/kaishin) and [@kylefiedler](https://twitter.com/kylefiedler).
 
-License
-===
+# License
 
-node-neat is Copyright © 2013 Michael LaCroix. It is free software, and may be redistributed under the terms specified in the LICENSE file.
+node-neat is Copyright © 2013-2014 Michael LaCroix. It is free software, and may be redistributed under the terms specified in the LICENSE file.
