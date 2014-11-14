@@ -1,10 +1,10 @@
-[![Bourbon Neat](http://neat.bourbon.io/images/logotype.svg)](http://thoughtbot.com/neat)
+[![Neat](http://images.thoughtbot.com/bourbon/neat-logo.svg)](http://neat.bourbon.io)
 
 *This is a node-sass port of the [Neat](http://neat.bourbon.io) library. If you
 are looking for the original Ruby/Rails version, you can find it
 [here](https://github.com/thoughtbot/neat).*
 
-[![Build Status](https://travis-ci.org/lacroixdesign/node-neat.png?branch=master)](https://travis-ci.org/lacroixdesign/node-neat)
+[![Build Status](http://img.shields.io/travis/lacroixdesign/node-neat.svg?style=flat)](https://travis-ci.org/lacroixdesign/node-neat)
 
 # Contents
 
