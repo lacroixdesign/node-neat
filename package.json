@@ -1,6 +1,6 @@
 {
   "name": "node-neat",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "node-sass port of Thoughtbot's Neat library",
   "main": "index.js",
   "scripts": {

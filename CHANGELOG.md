@@ -1,3 +1,7 @@
+# v1.4.2
+
+- Fix additional conditionals that were using a syntax incompatible with libsass.
+
 # v1.4.1
 
 - Fix conditionals that were using a syntax incompatible with libsass.
