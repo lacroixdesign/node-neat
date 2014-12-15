@@ -1,3 +1,7 @@
+# v1.4.1
+
+- Fix conditionals that were using a syntax incompatible with libsass.
+
 # v1.4.0
 
 - Update Neat to [v1.7.0](https://github.com/thoughtbot/neat/releases/tag/v1.7.0)
