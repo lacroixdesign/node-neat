@@ -74,6 +74,8 @@ Use either method above with the Sass config for your chosen tool (gulp.js, Grun
 
 ## gulp.js Usage
 
+### Using *gulp-sass* 
+
 Using the [gulp-sass](https://github.com/dlmanning/gulp-sass) plugin.
 
 ```javascript
@@ -88,6 +90,23 @@ gulp.task('sass', function () {
       includePaths: require('node-neat').includePaths
     }))
     .pipe(gulp.dest('path/to/output.css'));
+});
+```
+
+### Using *gulp-ruby-sass* 1.0 
+
+Using the [gulp-ruby-sass 1.0](https://github.com/sindresorhus/gulp-ruby-sass/tree/rw/1.0) plugin. The recommended installation is `npm install --save-dev gulp-ruby-sass@1.0.0-alpha`.  
+
+Example config: 
+
+```javascript
+var gulp = require('gulp');
+var sass = require('gulp-ruby-sass');
+var neat = require('node-neat').includePaths;
+
+gulp.task('sass', function() {
+    return sass('path/to/input.scss', {loadPath: ['sass'].concat(neat)})
+        .pipe(gulp.dest('path/to/output.css'))
 });
 ```
 
