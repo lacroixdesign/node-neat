@@ -1,7 +1,7 @@
 {
   "name": "node-neat",
-  "version": "1.4.2",
-  "description": "node-sass port of Thoughtbot's Neat library",
+  "version": "1.7.1-beta1",
+  "description": "node-sass wrapper for thoughtbot's bourbon neat library",
   "main": "index.js",
   "scripts": {
     "test": "node_modules/.bin/mocha --reporter spec --recursive --growl"
@@ -20,11 +20,12 @@
     "url": "https://github.com/lacroixdesign/node-neat/issues"
   },
   "dependencies": {
-    "node-bourbon": "*"
+    "bourbon-neat": "1.7.1",
+    "node-bourbon": "^4.2.1-beta1"
   },
   "devDependencies": {
-    "chai": "~1.8.1",
-    "mocha": "~1.14.0",
-    "node-sass": ">=1.0.0"
+    "chai": "^1.10.0",
+    "mocha": "^2.1.0",
+    "node-sass": "^2.0.0"
   }
 }

@@ -1,9 +1,11 @@
 var path = require('path');
+var bourbon = require('node-bourbon');
+
+var neatEntryPoint = require.resolve('bourbon-neat');
+var neatDir = path.dirname(neatEntryPoint);
 
 function includePaths() {
-  var bourbonPaths = require('node-bourbon').includePaths;
-  var neatPaths    = path.join(__dirname, 'assets/stylesheets');
-  return bourbonPaths.concat(neatPaths);
+  return bourbon.with(neatDir);
 }
 
 module.exports = {
