@@ -68,7 +68,6 @@ neat.includePaths // Array of Neat paths
 Use either method above with the Sass config for your chosen tool (gulp.js, Grunt, etc.), then it's business as usual for Neat & Bourbon in your stylesheet:
 
 ```scss
-@import "bourbon";
 @import "neat";
 ```
 
