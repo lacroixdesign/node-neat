@@ -1,11 +1,11 @@
-var bourbonNeat = require('bourbon-neat')
+var bourbonNeat = require('bourbon-neat');
 
 module.exports = {
 
   includePaths: bourbonNeat.includePaths,
 
   with: function () {
-    return [].concat.apply(bourbonNeat.includePaths, arguments)
+    return [].concat.apply(bourbonNeat.includePaths, arguments);
   }
 
 }
