@@ -1,19 +1,11 @@
-var path = require('path');
-var bourbon = require('node-bourbon');
-
-var neatEntryPoint = require.resolve('bourbon-neat');
-var neatDir = path.dirname(neatEntryPoint);
-
-function includePaths() {
-  return bourbon.with(neatDir);
-}
+var bourbonNeat = require('bourbon-neat');
 
 module.exports = {
 
-  includePaths: includePaths(),
+  includePaths: bourbonNeat.includePaths,
 
-  with: function() {
-    return [].concat.apply(includePaths(), arguments);
+  with: function () {
+    return [].concat.apply(bourbonNeat.includePaths, arguments);
   }
 
-};
+}
