@@ -20,7 +20,7 @@
     "url": "https://github.com/lacroixdesign/node-neat/issues"
   },
   "dependencies": {
-    "bourbon-neat": "^2.0.0"
+    "bourbon-neat": "^2.1.0"
   },
   "devDependencies": {
     "chai": "^1.10.0",
